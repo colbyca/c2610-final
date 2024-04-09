@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <nav><button onClick={logout}>Logout</button></nav>
+      {/* <nav><button onClick={logout}>Logout</button></nav> */}
       <Outlet />
     </>
   )

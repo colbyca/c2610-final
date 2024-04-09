@@ -5,6 +5,7 @@ import os
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import GroceryList, Item
+from django.http import HttpRequest
 
 # Load manifest when server launches
 MANIFEST = {}
@@ -42,3 +43,21 @@ def create_list(req):
         )
         item.save()
     return JsonResponse({"success": True})
+
+def create_raffle(req: HttpRequest):
+    return JsonResponse()
+
+def create_(req: HttpRequest):
+    return JsonResponse()
+
+def create_ticket(req: HttpRequest):
+    return JsonResponse()
+
+# def create_raffle(req: HttpRequest):
+#     return JsonResponse()
+
+# def create_raffle(req: HttpRequest):
+#     return JsonResponse()
+
+# def create_raffle(req: HttpRequest):
+#     return JsonResponse()
