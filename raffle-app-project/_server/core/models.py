@@ -9,3 +9,15 @@ class Item(models.Model):
     name = models.TextField()
     purchased = models.BooleanField()
     grocery_list = models.ForeignKey("GroceryList", on_delete=models.CASCADE)
+
+class Raffle(models.Model):
+    name = models.TextField()
+    description = models.TextField()
+    max_tickets = models.IntegerField()
+    share_publically = models.BooleanField()
+    code = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Ticket(models.Model):
+    raffle = models.ForeignKey("Raffle", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

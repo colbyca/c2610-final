@@ -45,6 +45,10 @@ def create_list(req):
     return JsonResponse({"success": True})
 
 def create_raffle(req: HttpRequest):
+    body = json.loads(req.body)
+    # validate data
+
+    
     return JsonResponse()
 
 def create_(req: HttpRequest):
