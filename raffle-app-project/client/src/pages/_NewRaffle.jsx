@@ -19,10 +19,6 @@ export const NewRaffle = () => {
           Description
           <textarea value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
         </label>
-        <label htmlFor="raffle-title">
-          Share publicly
-          <input type="checkbox" checked={raffleVis} onChange={e => setRaffleVis(e.target.checked)} />
-        </label>
       </form>
     </>
 

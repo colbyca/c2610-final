@@ -14,7 +14,6 @@ class Raffle(models.Model):
     name = models.TextField()
     description = models.TextField()
     max_tickets = models.IntegerField()
-    share_publically = models.BooleanField()
     code = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
