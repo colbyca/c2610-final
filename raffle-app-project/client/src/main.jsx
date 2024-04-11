@@ -4,9 +4,10 @@ import App from './App.jsx'
 import './index.css'
 import 'vite/modulepreload-polyfill'
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import { Home } from './pages/home/_Home.jsx'
-import { NewList } from './pages/new_list/_NewList.jsx'
-import { NewRaffle } from './pages/new_raffle/_NewRaffle.jsx'
+import { Home } from './pages/_Home.jsx'
+import { NewList } from './pages/_NewList.jsx'
+import { NewRaffle } from './pages/_NewRaffle.jsx'
+
 const router = createHashRouter([
   {
     path: "/",

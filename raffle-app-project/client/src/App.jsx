@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router'
-import { OpenRaffles } from "./_OpenRaffles"
-import "../../styles/home/home.css"
+import "./styles/home.css"
+import { Navigation } from "./pages/_Navigation"
+
 
 function App() {
   async function logout() {
@@ -20,9 +21,10 @@ function App() {
     <>
       <div className="home-container">
         <Navigation />
-        <OpenRaffles />
-        <Outlet />
-        <Link to="/raffle/new">Create New Raffle</Link>
+        <div>
+          <Outlet />
+          
+        </div>
       </div>
     </>
   )

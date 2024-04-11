@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import "../../styles/home/navigation.css"
+import "../styles/navigation.css"
 import { useState, useEffect } from "react";
 
 export const Navigation = () => {
@@ -21,6 +21,7 @@ export const Navigation = () => {
             <button className="navdrawer-toggle" onClick={handleDrawer}>
               <span className="navbar-title">My Raffles</span>
             </button>
+            <Link to="/raffle/new">Create New Raffle</Link>
           </div>
         </div>
       </nav>

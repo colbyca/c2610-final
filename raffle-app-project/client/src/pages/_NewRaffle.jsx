@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import "../../styles/home/navigation.css"
 import { useState, useEffect } from "react";
 
 export const NewRaffle = () => {
