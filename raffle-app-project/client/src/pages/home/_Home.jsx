@@ -4,8 +4,6 @@ import { OpenRaffles } from "./_OpenRaffles"
 import "../../styles/home/home.css"
 
 
-
-
 export const Home = () => {
 
 

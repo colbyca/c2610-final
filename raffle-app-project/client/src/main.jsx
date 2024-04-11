@@ -16,16 +16,13 @@ const router = createHashRouter([
         path: "/",
         element: <Home />
       }, {
-        path: "/grocery_list/new",
-        element: <NewList />
-      }, {
-        path: "/grocery_list/:id",
+        path: "/raffles",
         element: <h1>I am on the the list page</h1>
       }, {
         path: "/raffle/new",
         element: <NewRaffle />
       }, {
-        path: "/grocery_list/",
+        path: "/raffle/:id",
         element: <h1>I am on the the list page</h1>
       }
     ]
