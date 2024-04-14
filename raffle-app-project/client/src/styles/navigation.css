@@ -62,3 +62,12 @@
     color: #0a84ff;
     cursor: pointer;
 }
+
+.button {
+    padding: 1px 6px;
+    border: 1px outset buttonborder;
+    border-radius: 3px;
+    color: white;
+    background-color: grey;
+    text-decoration: none;
+}

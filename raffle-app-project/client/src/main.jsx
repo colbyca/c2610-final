@@ -4,9 +4,10 @@ import App from './App.jsx'
 import './index.css'
 import 'vite/modulepreload-polyfill'
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import { Home } from './pages/_Home.jsx'
+import { JoinRaffle } from './pages/_JoinRaffle.jsx'
 import { NewList } from './pages/_NewList.jsx'
 import { NewRaffle } from './pages/_NewRaffle.jsx'
+import { UserInfo } from './pages/_UserInfo.jsx'
 
 const router = createHashRouter([
   {
@@ -15,7 +16,7 @@ const router = createHashRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <JoinRaffle />
       }, {
         path: "/raffles",
         element: <h1>I am on the the list page</h1>
@@ -25,6 +26,9 @@ const router = createHashRouter([
       }, {
         path: "/raffle/:id",
         element: <h1>I am on the the list page</h1>
+      },{
+        path: "/userinfo",
+        element: <UserInfo />
       }
     ]
   }

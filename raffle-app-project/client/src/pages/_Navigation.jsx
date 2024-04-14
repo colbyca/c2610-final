@@ -13,6 +13,9 @@ export const Navigation = () => {
       setNavDrawer(false)
     }
   }
+
+  
+
   return (
     <>
       <nav className="navbar">
@@ -21,7 +24,9 @@ export const Navigation = () => {
             <button className="navdrawer-toggle" onClick={handleDrawer}>
               <span className="navbar-title">My Raffles</span>
             </button>
-            <Link to="/raffle/new">Create New Raffle</Link>
+            <Link to="/raffle/new" className="button">Create New Raffle</Link>
+            <Link to="/" className="button">Join Raffle</Link>
+            <Link to="/userinfo" className="button">User Info</Link>
           </div>
         </div>
       </nav>
