@@ -4,7 +4,7 @@ import json
 import os
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import GroceryList, Item
+from .models import GroceryList, Item, Raffle, Ticket
 from django.http import HttpRequest
 
 # Load manifest when server launches
@@ -47,9 +47,16 @@ def create_list(req):
 def create_raffle(req: HttpRequest):
     body = json.loads(req.body)
     # validate data
-
+    raffle = Raffle(
+        name=body["raffleTitle"],
+        description=body["raffleDesc"],
+        max_tickets=int(body["maxTickets"]),
+        code=body["raffleCode"],
+        user=req.user
+    )
+    raffle.save()
     
-    return JsonResponse()
+    return JsonResponse({"success": True})
 
 def create_(req: HttpRequest):
     return JsonResponse()
