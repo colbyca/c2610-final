@@ -14,7 +14,6 @@ export const Navigation = () => {
     }
   }
 
-  
 
   return (
     <>

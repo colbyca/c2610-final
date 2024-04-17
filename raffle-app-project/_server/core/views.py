@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import GroceryList, Item, Raffle, Ticket
 from django.http import HttpRequest
-
+from django.forms.models import model_to_dict
 # Load manifest when server launches
 MANIFEST = {}
 if not settings.DEBUG:
@@ -44,6 +44,31 @@ def create_list(req):
         item.save()
     return JsonResponse({"success": True})
 
+@login_required
+def grocery_lists(req):
+    print(req.method)
+    if req.method == "POST":
+        body =  json.loads(req.body)
+        # TODO validate data
+        grocery_list = GroceryList(
+            name=body["name"],
+            user=req.user
+        )
+        grocery_list.save()
+        for item_name in body["items"]:
+            item = Item(
+                grocery_list=grocery_list,
+                name=item_name,
+                purchased=False
+            )
+            item.save()
+        return JsonResponse({"success": True})
+    else:
+        lists = GroceryList.objects.filter(user=req.user)
+        lists = [model_to_dict(list) for list in lists]
+        print(lists)
+        return JsonResponse({ "groceryLists": lists })
+
 def create_raffle(req: HttpRequest):
     body = json.loads(req.body)
     # validate data
@@ -58,17 +83,36 @@ def create_raffle(req: HttpRequest):
     
     return JsonResponse({"success": True})
 
-def create_(req: HttpRequest):
-    return JsonResponse()
+@login_required
+def get_ownedRaffles(req: HttpRequest):
+    raffles = [model_to_dict(raffle) for raffle in Raffle.objects.filter(user=req.user)]
+    return JsonResponse({"raffles": raffles})
+
+@login_required
+def edit_raffle(req: HttpRequest, id):
+    raffle = Raffle.objects.get(pk=id)
+    body = json.loads(req.body)
+
+    # Validate data
+    raffle.name = body["raffleTitle"]
+    raffle.description = body["raffleDesc"]
+    raffle.save()
+    return JsonResponse({"success": "true"})
+
+@login_required
+def get_raffle(req: HttpRequest, id):
+    raffle = model_to_dict(Raffle.objects.get(pk=id))
+
+    return JsonResponse({"raffle": raffle})
+
 
 def create_ticket(req: HttpRequest):
-    return JsonResponse()
-
-# def create_raffle(req: HttpRequest):
-#     return JsonResponse()
-
-# def create_raffle(req: HttpRequest):
-#     return JsonResponse()
+    body = json.loads(req.body)
+    if Raffle.objects.filter(code=body["raffleCode"]).exists():
+        raffle = model_to_dict(Raffle.objects.get(code=body["raffleCode"]))
+        return JsonResponse({"success": "true", "raffle": raffle})
+    else:
+        return JsonResponse({"success": "false", "raffle": ""})
 
 # def create_raffle(req: HttpRequest):
 #     return JsonResponse()

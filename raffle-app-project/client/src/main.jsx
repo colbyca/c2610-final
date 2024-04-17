@@ -8,6 +8,7 @@ import { JoinRaffle } from './pages/_JoinRaffle.jsx'
 import { NewList } from './pages/_NewList.jsx'
 import { NewRaffle } from './pages/_NewRaffle.jsx'
 import { UserInfo } from './pages/_UserInfo.jsx'
+import { EditRaffle } from './pages/_EditRaffle.jsx'
 
 const router = createHashRouter([
   {
@@ -24,9 +25,9 @@ const router = createHashRouter([
         path: "/raffle/new",
         element: <NewRaffle />
       }, {
-        path: "/raffle/:id",
-        element: <h1>I am on the the list page</h1>
-      },{
+        path: "/raffle_edit/:id",
+        element: <EditRaffle />
+      }, {
         path: "/userinfo",
         element: <UserInfo />
       }
