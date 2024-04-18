@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import { Navigation } from "./_Navigation"
+import { motion as m } from "framer-motion";
+import "../styles/newraffle.css"
 import { useRaffles } from "../../utils/use_raffles"
 
 export const UserInfo = () => {
@@ -21,7 +23,12 @@ export const UserInfo = () => {
 
 
   return (
-    <>
+    <m.div className="mdiv"
+      initial={{ y: "100%" }}
+      animate={{ y: "0%" }}
+      transition={{ duration: 0.75, ease: "easeInOut" }}
+      exit={{ y: "-50%" }}
+    >
       <button onClick={logout} className="button">Logout</button>
       <h1>My Open Raffles</h1>
       <div>
@@ -40,6 +47,6 @@ export const UserInfo = () => {
       <div>
         {/* Put user's joined raffles here */}
       </div>
-    </>
+    </m.div>
   )
 }
