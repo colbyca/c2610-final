@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import "../styles/navigation.css"
+import RafWiz from "../styles/Raf_Wiz.png"
 import { useState, useEffect } from "react";
 
 export const Navigation = () => {
@@ -17,26 +18,15 @@ export const Navigation = () => {
   
 
   return (
-    <>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <div className="navbar-titleicon">
-            <button className="navdrawer-toggle" onClick={handleDrawer}>
-              <span className="navbar-title">My Raffles</span>
-            </button>
-            <Link to="/raffle/new" className="button">Create New Raffle</Link>
-            <Link to="/" className="button">Join Raffle</Link>
-            <Link to="/userinfo" className="button">User Info</Link>
-          </div>
-        </div>
-      </nav>
-      <nav className="drawer" data-open={navDrawer}>
-        <a href=""><span>Example 1</span></a>
-        <a href=""><span>Example 2</span></a>
-        <a href=""><span>Example 3</span></a>
-        <a href=""><span>Example 4</span></a>
-      </nav >
-    </>
-
+    <nav id="navbar">
+      <div id="navbar-container">
+        <img src={RafWiz} alt="Raf Wiz" id="rafwiz"></img>
+        <Link to="/raffle/new" className="button">Create New Raffle</Link>
+        <Link to="/" className="button">Join Raffle</Link>
+      </div>
+      <div id="navbar-container">
+        <Link to="/userinfo" className="button">Account</Link>
+      </div>
+    </nav>
   )
 }

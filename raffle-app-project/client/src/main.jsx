@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import 'vite/modulepreload-polyfill'
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider, BrowserRouter as Router} from "react-router-dom";
 import { JoinRaffle } from './pages/_JoinRaffle.jsx'
 import { NewList } from './pages/_NewList.jsx'
 import { NewRaffle } from './pages/_NewRaffle.jsx'
 import { UserInfo } from './pages/_UserInfo.jsx'
 
-const router = createHashRouter([
+/*const router = createHashRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App/>,
     children: [
       {
         path: "/",
@@ -32,8 +32,19 @@ const router = createHashRouter([
       }
     ]
   }
-])
+])*/
+
+function Main(){
+  return(
+    <div>
+      <Router>
+        <App/>
+      </Router>
+    </div>
+  )
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+  /*<RouterProvider router={router} />*/
+  <Main/>
 )

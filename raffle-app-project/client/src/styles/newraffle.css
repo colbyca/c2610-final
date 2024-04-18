@@ -1,33 +1,23 @@
-#navbar {
-    background-color: #b0d7ff;
-    color: #fff;
-
+.mdiv{
     width:100%;
-    z-index: 99;
+    height:100%;
     position:absolute;
-    padding: 10px 0px;
+}
+
+form {
+    background-color: #eae8ff;
+    color: black;
+    padding: 20px;
     height: 150px;
+    width:70%;
 
-
+    margin: 30px auto;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-radius: 30px;
 
-}
-
-#navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap:20px;
-    padding: 12px;
-}
-
-#rafwiz{
-    height:200px;
-    width: 200px;
 }
 
 .button {

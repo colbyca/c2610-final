@@ -1,9 +1,19 @@
 import { Outlet } from 'react-router'
-import "./styles/home.css"
 import { Navigation } from "./pages/_Navigation"
+import {AnimatePresence} from "framer-motion";
+import {useLocation, Routes, Route} from "react-router-dom";
+import './index.css'
+
+import { JoinRaffle } from './pages/_JoinRaffle.jsx'
+import { NewRaffle } from './pages/_NewRaffle.jsx'
+import { UserInfo } from './pages/_UserInfo.jsx'
+
 
 
 function App() {
+
+  const location = useLocation();
+
   async function logout() {
     const res = await fetch("/registration/logout/", {
       credentials: "same-origin", // include cookies!
@@ -19,12 +29,17 @@ function App() {
 
   return (
     <>
+      <Navigation />
       <div className="home-container">
-        <Navigation />
-        <div>
-          <Outlet />
-          
-        </div>
+        <AnimatePresence initial={false}>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<JoinRaffle/>}/>
+            <Route path="/raffles" element={<h1>I am on the the list page</h1>}/>
+            <Route path="/raffle/new" element={<NewRaffle/>}/>
+            <Route path="/raffle/:id" element={<h1>I am on the the list page</h1>}/>
+            <Route path="/userinfo" element={<UserInfo/>}/>
+          </Routes>
+        </AnimatePresence>
       </div>
     </>
   )
