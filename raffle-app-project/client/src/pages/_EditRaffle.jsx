@@ -38,11 +38,11 @@ export const EditRaffle = () => {
       <form onSubmit={editRaffle}>
         <label htmlFor="raffle-title">
           Raffle Title
-          <input value={loading ? "" : raffleTitle} onChange={e => setRaffleTitle(e.target.value)} />
+          <input value={raffleTitle} onChange={e => setRaffleTitle(e.target.value)} />
         </label>
         <label htmlFor="raffle-description">
           Description
-          <textarea value={loading ? "" : raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
+          <textarea value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
         </label>
         <label htmlFor="max-tickets">
           <h3>Max tickets: {raffle.max_tickets}</h3>

@@ -12,7 +12,7 @@ export const JoinRaffle = () => {
 
   async function joinRaffle(e) {
 
-    const { success, raffle } = await api.post("/create_ticket/", {
+    const { success, raffle } = await api.post("/find_raffle/", {
       raffleCode
     });
     if (success === "true") {
@@ -34,7 +34,7 @@ export const JoinRaffle = () => {
       <div>
         Info of the raffle goes here.
       </div>
-      <Link to="/" className="button">Join Raffle</Link>
+      <Link to="/" className="button" onClick={joinRaffle}>Join Raffle</Link>
     </m.div>
   )
 }

@@ -106,13 +106,19 @@ def get_raffle(req: HttpRequest, id):
     return JsonResponse({"raffle": raffle})
 
 
-def create_ticket(req: HttpRequest):
+def find_raffle(req: HttpRequest):
     body = json.loads(req.body)
     if Raffle.objects.filter(code=body["raffleCode"]).exists():
         raffle = model_to_dict(Raffle.objects.get(code=body["raffleCode"]))
         return JsonResponse({"success": "true", "raffle": raffle})
     else:
         return JsonResponse({"success": "false", "raffle": ""})
+    
+def join_raffle(req: HttpRequest, id):
+    raffle = Raffle.objects.get(pk=id)
+    ticket = Ticket(raffle=raffle, user=req.user)
+    ticket.save()
+    return JsonResponse({"success": "true"})
 
 # def create_raffle(req: HttpRequest):
 #     return JsonResponse()
