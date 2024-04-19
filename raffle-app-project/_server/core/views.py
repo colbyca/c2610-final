@@ -88,6 +88,15 @@ def get_ownedRaffles(req: HttpRequest):
     raffles = [model_to_dict(raffle) for raffle in Raffle.objects.filter(user=req.user)]
     return JsonResponse({"raffles": raffles})
 
+def get_joinedRaffles(req: HttpRequest):
+    tickets = Ticket.objects.filter(user=req.user)
+    raffles = []
+    for ticket in tickets:
+        raffles.append(ticket.raffle)
+    raffles = [model_to_dict(raffle) for raffle in raffles]
+    print(raffles)
+    return JsonResponse({"joinedRaffles": raffles})
+
 @login_required
 def edit_raffle(req: HttpRequest, id):
     raffle = Raffle.objects.get(pk=id)
@@ -105,7 +114,7 @@ def get_raffle(req: HttpRequest, id):
 
     return JsonResponse({"raffle": raffle})
 
-
+@login_required
 def find_raffle(req: HttpRequest):
     body = json.loads(req.body)
     if Raffle.objects.filter(code=body["raffleCode"]).exists():
@@ -114,6 +123,7 @@ def find_raffle(req: HttpRequest):
     else:
         return JsonResponse({"success": "false", "raffle": ""})
     
+@login_required
 def join_raffle(req: HttpRequest, id):
     raffle = Raffle.objects.get(pk=id)
     ticket = Ticket(raffle=raffle, user=req.user)
