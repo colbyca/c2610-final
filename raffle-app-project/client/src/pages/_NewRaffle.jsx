@@ -37,10 +37,10 @@ export const NewRaffle = () => {
 
   return (
     <m.div className="mdiv"
-    initial={{y:"100%"}} 
-    animate={{y:"0%"}} 
+    initial={{y:"100%", opacity:0}} 
+    animate={{y:"0%", opacity:1}} 
     transition={{duration: 0.75, ease:"easeInOut"}} 
-    exit={{y:"-50%"}}
+    exit={{y:"-50%", opacity:0}}
     >
       <form onSubmit={createRaffle}>
 
@@ -50,25 +50,25 @@ export const NewRaffle = () => {
         </label>
 
         <label htmlFor="raffle-code">
-          Code
-          <input value={raffleCode} />
-          <button onClick={(e) => {
+          Join Code
+          <button className="button" onClick={(e) => {
             e.preventDefault();
             setRaffleCode((createCode(6)));
           }}>Create Code</button>
+          <input value={raffleCode} />
         </label>
         
         <label htmlFor="max-tickets">
-          Maximum tickets allowed
+          Max # of Entries
           <input value={maxTickets} onChange={e => setMaxTickets(e.target.value)} type="number" />
         </label>
         
         <label htmlFor="raffle-description">
           Description
-          <textarea value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
+          <textarea rows="5" value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
         </label>
 
-        <button>Create Raffle</button>
+        <button className="button submit">Create Raffle</button>
       </form>
     </m.div>
   )

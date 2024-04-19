@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import { Navigation } from "./_Navigation"
 import { motion as m } from "framer-motion";
-import "../styles/newraffle.css"
 import { useRaffles } from "../../utils/use_raffles"
+import "../styles/userinfo.css"
 
 export const UserInfo = () => {
 
@@ -24,29 +24,35 @@ export const UserInfo = () => {
 
   return (
     <m.div className="mdiv"
-      initial={{ y: "100%" }}
-      animate={{ y: "0%" }}
-      transition={{ duration: 0.75, ease: "easeInOut" }}
-      exit={{ y: "-50%" }}
+    initial={{y:"100%", opacity:0}} 
+    animate={{y:"0%", opacity:1}} 
+    transition={{duration: 0.75, ease:"easeInOut"}} 
+    exit={{y:"-50%", opacity:0}}
     >
+      <div className="divider">
+        <div className="container">
+          <h1>My Open Raffles</h1>
+          <div className="raffleList">
+            {
+              raffles.map(raffle => (
+                <div className="placeholder" key={raffle.id}>
+                  <h3><Link to={`/raffle_edit/${raffle.id}`}>{raffle.name}</Link></h3>
+                  <div>
+                    {raffle.description}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div className="container">
+          <h1>Joined Raffles</h1>
+          <div>
+            {/* Put user's joined raffles here */}
+          </div>
+        </div>
+      </div>
       <button onClick={logout} className="button">Logout</button>
-      <h1>My Open Raffles</h1>
-      <div>
-        {
-          raffles.map(raffle => (
-            <div className="placeholder" key={raffle.id}>
-              <h3><Link to={`/raffle_edit/${raffle.id}`}>{raffle.name}</Link></h3>
-              <div>
-                {raffle.description}
-              </div>
-            </div>
-          ))
-        }
-      </div>
-      <h1>Joined Raffles</h1>
-      <div>
-        {/* Put user's joined raffles here */}
-      </div>
     </m.div>
   )
 }

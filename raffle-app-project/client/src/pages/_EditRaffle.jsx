@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useApi } from "../../utils/api";
 import { useRaffle } from "../../utils/use_raffle";
+import {motion as m} from "framer-motion";
+import "../styles/newraffle.css"
 
 export const EditRaffle = () => {
   const { id } = useParams();
@@ -34,24 +36,33 @@ export const EditRaffle = () => {
 
 
   return (
-    <>
+    <m.div className="mdiv"
+    initial={{y:"100%", opacity:0}} 
+    animate={{y:"0%", opacity:1}} 
+    transition={{duration: 0.75, ease:"easeInOut"}} 
+    exit={{y:"-50%", opacity:0}}
+    >
       <form onSubmit={editRaffle}>
         <label htmlFor="raffle-title">
           Raffle Title
           <input value={raffleTitle} onChange={e => setRaffleTitle(e.target.value)} />
         </label>
+
+        <label htmlFor="raffle-code">
+          <div>Join Code: </div><div>{raffle.code}</div>
+        </label>
+
+        <label htmlFor="max-tickets">
+          <div>Max # of Entries: </div><div>{raffle.max_tickets}</div>
+        </label>
+
         <label htmlFor="raffle-description">
           Description
-          <textarea value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
+          <textarea rows="5" value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
         </label>
-        <label htmlFor="max-tickets">
-          <h3>Max tickets: {raffle.max_tickets}</h3>
-        </label>
-        <label htmlFor="raffle-code">
-          <h3>Code: {raffle.code}</h3>
-        </label>
-        <button>Save Changes</button>
+        
+        <button className="button submit">Save Changes</button>
       </form>
-    </>
+    </m.div>
   )
 }

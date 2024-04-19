@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { useApi } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { motion as m } from "framer-motion";
-import "../styles/newraffle.css"
 
 export const JoinRaffle = () => {
   const [raffleCode, setCode] = useState("");
@@ -25,10 +24,10 @@ export const JoinRaffle = () => {
 
   return (
     <m.div className="mdiv"
-      initial={{ y: "100%" }}
-      animate={{ y: "0%" }}
-      transition={{ duration: 0.75, ease: "easeInOut" }}
-      exit={{ y: "-50%" }}
+    initial={{y:"100%", opacity:0}} 
+    animate={{y:"0%", opacity:1}} 
+    transition={{duration: 0.75, ease:"easeInOut"}} 
+    exit={{y:"-50%", opacity:0}}
     >
       <input value={raffleCode} onChange={e => setCode(e.target.value)} />
       <div>
