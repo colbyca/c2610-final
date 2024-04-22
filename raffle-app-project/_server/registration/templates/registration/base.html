@@ -6,12 +6,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    :root {
+      font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      font-weight: 400;
+
+      color-scheme: light dark;
+      color: rgba(255, 255, 255, 0.87);
+      background-color: #242424;
+
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+    }
+
+    body{
+      margin:0px;
+    }
+
+    #navbar {
+      background-color: #b0d7ff;
+      color: #fff;
+
+      width: 100%;
+      z-index: 99;
+      position: absolute;
+      padding: 10px 0px;
+      height: 150px;
+
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+
+    }
+
+    #navbar-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 12px;
+    }
+
+    #rafwiz {
+      height: 200px;
+      width: 200px;
+      z-index:100;
+    }
+
+    .home-container {
+      background-color: #eae8ff;
+      color: black;
+      padding: 10px 0px;
+      height: auto;
+      width:60%;
+      border-radius: 30px;
+      margin: 0px auto;
+      font-size:32px;
+
+      top: 190px;
+      position:relative;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      gap:20px;
+    }
+
+    .button {
+      display: flex;
+      height: 40px;
+      width: 200px;
+      padding: 5px 10px;
+      border: solid;
+      border-width: 5px;
+      border-radius: 100px;
+      border-color: #2d3142;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all .2s ease;
+      cursor: pointer;
+      font-size: 24px;
+
+      background-color: #d8d5db;
+      color: #2d3142;
+    }
+
+    .button:hover {
+      background-color: #2d3142;
+      color: white;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width:80%;
+
+      gap:20px;
+    }
+
+    form>div{
+      width:100%;
+    }
+
+    a{
+      font-size:24px;
+      color:blue;
+    }
+
+    input{
+      width:50%;
+      height:auto;
+      padding:5px;
+      border-radius:5px;
+      font-size:18px;
+    }
+
+    label{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+    }
+
     /* style your login pages here because the normal
       static asset flow is different now */
   </style>
 </head>
 <body>
-  {% block content %}
-  {% endblock %}
+  <nav id="navbar">
+    <div id="navbar-container">
+      <img src="{% static 'registration/Raf_Wiz.png' %}" alt="Raf Wiz" id="rafwiz"></img>
+    </div>
+  </nav>
+  <div class="home-container">
+    {% block content %}
+    {% endblock %}
+  </div>
 </body>
 </html>
