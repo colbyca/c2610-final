@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { useApi } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { motion as m } from "framer-motion";
+import "../styles/joinraffle.css"
 
 export const JoinRaffle = () => {
   const [raffleCode, setCode] = useState("");
@@ -29,11 +30,10 @@ export const JoinRaffle = () => {
     transition={{duration: 0.75, ease:"easeInOut"}} 
     exit={{y:"-50%", opacity:0}}
     >
-      <input value={raffleCode} onChange={e => setCode(e.target.value)} />
-      <div>
-        Info of the raffle goes here.
+      <div className="join">
+        <input value={raffleCode} placeholder="Join Code" onChange={e => setCode(e.target.value)} />  
+        <Link to="/" className="button" onClick={joinRaffle}>Search Raffle</Link>
       </div>
-      <Link to="/" className="button" onClick={joinRaffle}>Join Raffle</Link>
     </m.div>
   )
 }

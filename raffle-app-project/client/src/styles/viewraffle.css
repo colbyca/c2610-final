@@ -17,32 +17,22 @@ form {
     gap:20px;
 }
 
-form > *{
+.view{
     width:100%;
     display:flex;
-    justify-content:space-between;
-    align-items:center;
-    height:75px;
+    flex-direction:column;
+    align-items:baseline;
+    height:auto;
 }
 
-textarea{
-    width:50%;
-    padding:11px;
-    border-radius:5px;
+.view>div{
+    width:100%;
 }
 
 .description{
     width:50%;
     font-size:18px;
 
-}
-  
-input{
-    width:50%;
-    height:auto;
-    padding:10px;
-    border-radius:5px;
-    font-size:24px;
 }
 
 .button {
@@ -68,9 +58,4 @@ input{
 .button:hover{
     background-color: #2d3142;
     color: white;
-}
-
-.submit{
-    margin:10px;
-    width:200px;
 }

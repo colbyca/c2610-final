@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useApi } from "../../utils/api";
 import { motion as m } from "framer-motion";
-import "../styles/newraffle.css"
+import "../styles/viewraffle.css"
 import { useRaffle } from "../../utils/use_raffle";
 
 export const ViewRaffle = () => {
@@ -31,13 +31,13 @@ export const ViewRaffle = () => {
       <form>
         <h3>{raffle.name}</h3>
 
-        <label htmlFor="raffle-description">
+        <label className="view" htmlFor="raffle-description">
           Description
-          <div>
+          <div className="description">
             {raffle.description}
           </div>
         </label>
-        <button onClick={joinRaffle}>Join Raffle</button>
+        <button className="button" onClick={joinRaffle}>Join Raffle</button>
       </form>
     </m.div>
   )
