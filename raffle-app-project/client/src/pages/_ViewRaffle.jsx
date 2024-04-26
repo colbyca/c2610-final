@@ -18,7 +18,7 @@ export const ViewRaffle = () => {
     if (success == "true") {
     }
 
-    navigate(`/raffle/${id}`);
+    navigate(`/userinfo`);
   }
 
   return (

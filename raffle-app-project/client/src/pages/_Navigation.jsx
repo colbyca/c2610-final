@@ -1,19 +1,8 @@
 import { Link } from "react-router-dom"
 import "../styles/navigation.css"
 import RafWiz from "../styles/Raf_Wiz.png"
-import { useState, useEffect } from "react";
 
 export const Navigation = () => {
-  const [navDrawer, setNavDrawer] = useState(false);
-
-  function handleDrawer() {
-    if (navDrawer === false) {
-      setNavDrawer(true)
-    }
-    else {
-      setNavDrawer(false)
-    }
-  }
 
 
   return (

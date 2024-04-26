@@ -38,7 +38,7 @@ export const UserInfo = () => {
             {
               raffles.map(raffle => (
                 <div className="placeholder" key={raffle.id}>
-                  <h3><Link to={`/raffle_edit/${raffle.id}`}>{raffle.name}</Link></h3>
+                  <h3><Link to={`/raffle_edit/${raffle.id}/`}>{raffle.name}</Link></h3>
                   <div>
                     {raffle.description}
                   </div>
@@ -53,7 +53,7 @@ export const UserInfo = () => {
           {
               joinedRaffles.map(raffle => (
                 <div className="placeholder" key={raffle.id}>
-                  <h3><Link to={`/raffle_view/${raffle.id}`}>{raffle.name}</Link></h3>
+                  <h3><Link to={`/raffle_view/${raffle.id}/`}>{raffle.name}</Link></h3>
                   <div>
                     {raffle.description}
                   </div>

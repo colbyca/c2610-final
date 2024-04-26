@@ -26,7 +26,7 @@ export const EditRaffle = () => {
   async function editRaffle(e) {
     e.preventDefault();
 
-    await api.post(`/edit_raffle/${id}`, {
+    await api.post(`/edit_raffle/${id}/`, {
       raffleTitle,
       raffleDesc,
     });
