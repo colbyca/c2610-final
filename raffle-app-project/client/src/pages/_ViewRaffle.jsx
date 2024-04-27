@@ -5,6 +5,10 @@ import { motion as m } from "framer-motion";
 import "../styles/viewraffle.css"
 import { useRaffle } from "../../utils/use_raffle";
 
+import React from 'react';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export const ViewRaffle = () => {
 
   const { id } = useParams();
@@ -18,8 +22,21 @@ export const ViewRaffle = () => {
     if (success === "true") {
       navigate(`/userinfo`)
     }else{
-      alert(error)
+      notify(error);
     }
+  }
+
+  const notify = (message) => {
+    toast.warn(message, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+    });
   }
 
   return (

@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { motion as m } from "framer-motion";
 import "../styles/joinraffle.css"
 
+import React from 'react';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export const JoinRaffle = () => {
   const [raffleCode, setCode] = useState("");
   const api = useApi();
@@ -19,9 +23,22 @@ export const JoinRaffle = () => {
       navigate(`/raffle/${raffle.id}`);
     } else {
       // Change this so it is an error on screen
-      alert("No Raffle found!");
+      notify("No raffle found!");
       
     }
+  }
+
+  const notify = (message) => {
+    toast.warn(message, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+    });
   }
 
   return (

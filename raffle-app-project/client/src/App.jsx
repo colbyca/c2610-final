@@ -9,6 +9,7 @@ import { NewRaffle } from './pages/_NewRaffle.jsx'
 import { UserInfo } from './pages/_UserInfo.jsx'
 import { EditRaffle } from './pages/_EditRaffle.jsx';
 import { ViewRaffle } from './pages/_ViewRaffle.jsx';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -44,6 +45,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </div>
+      <ToastContainer/>
     </>
   )
 }
