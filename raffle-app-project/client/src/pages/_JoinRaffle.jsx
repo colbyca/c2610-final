@@ -19,7 +19,8 @@ export const JoinRaffle = () => {
       navigate(`/raffle/${raffle.id}`);
     } else {
       // Change this so it is an error on screen
-      alert("No Raffle found!")
+      alert("No Raffle found!");
+      
     }
   }
 
@@ -31,7 +32,7 @@ export const JoinRaffle = () => {
     exit={{y:"-50%", opacity:0}}
     >
       <div className="join">
-        <input value={raffleCode} placeholder="Join Code" onChange={e => setCode(e.target.value)} />  
+        <input value={raffleCode} required placeholder="Join Code" onChange={e => setCode(e.target.value)} />  
         <Link to="/" className="button" onClick={joinRaffle}>Search Raffle</Link>
       </div>
     </m.div>

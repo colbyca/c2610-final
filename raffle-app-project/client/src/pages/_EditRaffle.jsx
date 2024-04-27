@@ -45,7 +45,7 @@ export const EditRaffle = () => {
       <form onSubmit={editRaffle}>
         <label htmlFor="raffle-title">
           Raffle Title
-          <input value={raffleTitle} onChange={e => setRaffleTitle(e.target.value)} />
+          <input value={raffleTitle} required onChange={e => setRaffleTitle(e.target.value)} />
         </label>
 
         <label htmlFor="raffle-code">
@@ -58,7 +58,7 @@ export const EditRaffle = () => {
 
         <label htmlFor="raffle-description">
           Description
-          <textarea rows="5" value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
+          <textarea rows="5" required maxlength="300" value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
         </label>
         
         <button className="button submit">Save Changes</button>

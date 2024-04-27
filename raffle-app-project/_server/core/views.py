@@ -126,9 +126,16 @@ def find_raffle(req: HttpRequest):
 @login_required
 def join_raffle(req: HttpRequest, id):
     raffle = Raffle.objects.get(pk=id)
+
+    if raffle.user == req.user:
+        return JsonResponse({"success": "false", "error":"You own this Raffle"})
+    
+    if Ticket.objects.filter(user_id = req.user).exists():
+        return JsonResponse({"success": "false", "error":"You already joined this Raffle"})
+    
     ticket = Ticket(raffle=raffle, user=req.user)
     ticket.save()
-    return JsonResponse({"success": "true"})
+    return JsonResponse({"success": "true", "error":""})
 
 # def create_raffle(req: HttpRequest):
 #     return JsonResponse()

@@ -14,11 +14,12 @@ export const ViewRaffle = () => {
 
   async function joinRaffle(e) {
     e.preventDefault();
-    const { success } = await api.post(`/join_raffle/${id}/`, {});
-    if (success == "true") {
+    const { success, error } = await api.post(`/join_raffle/${id}/`, {});
+    if (success === "true") {
+      navigate(`/userinfo`)
+    }else{
+      alert(error)
     }
-
-    navigate(`/userinfo`);
   }
 
   return (
