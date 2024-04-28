@@ -26,10 +26,10 @@ export const UserInfo = () => {
 
   return (
     <m.div className="mdiv"
-    initial={{y:"100%", opacity:0}} 
-    animate={{y:"0%", opacity:1}} 
-    transition={{duration: 0.75, ease:"easeInOut"}} 
-    exit={{y:"-50%", opacity:0}}
+      initial={{ y: "100%", opacity: 0 }}
+      animate={{ y: "0%", opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeInOut" }}
+      exit={{ y: "-50%", opacity: 0 }}
     >
       <div className="divider">
         <div className="container">
@@ -38,7 +38,7 @@ export const UserInfo = () => {
             {
               raffles.map(raffle => (
                 <div className="placeholder" key={raffle.id}>
-                  <h3><Link to={`/raffle_edit/${raffle.id}/`}>{raffle.name}</Link></h3>
+                  <h3><Link to={`/raffle/${raffle.id}/`}>{raffle.name}</Link></h3>
                   <div>
                     {raffle.description}
                   </div>
@@ -50,10 +50,10 @@ export const UserInfo = () => {
         <div className="container">
           <h1>Joined Raffles</h1>
           <div>
-          {
+            {
               joinedRaffles.map(raffle => (
                 <div className="placeholder" key={raffle.id}>
-                  <h3><Link to={`/raffle_view/${raffle.id}/`}>{raffle.name}</Link></h3>
+                  <h3><Link to={`/raffle/${raffle.id}/`}>{raffle.name}</Link></h3>
                   <div>
                     {raffle.description}
                   </div>

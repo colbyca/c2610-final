@@ -4,9 +4,12 @@ import json
 import os
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import GroceryList, Item, Raffle, Ticket
+from .models import Raffle, Ticket, User
 from django.http import HttpRequest
 from django.forms.models import model_to_dict
+from datetime import datetime
+from django.core.mail import send_mail
+from random import choice
 # Load manifest when server launches
 MANIFEST = {}
 if not settings.DEBUG:
@@ -26,57 +29,25 @@ def index(req):
     return render(req, "core/index.html", context)
 
 
-@login_required
-def create_list(req):
-    body =  json.loads(req.body)
-    # TODO validate data
-    grocery_list = GroceryList(
-        name=body["name"],
-        user=req.user
-    )
-    grocery_list.save()
-    for item_name in body["items"]:
-        item = Item(
-            grocery_list=grocery_list,
-            name=item_name,
-            purchased=False
-        )
-        item.save()
-    return JsonResponse({"success": True})
-
-@login_required
-def grocery_lists(req):
-    print(req.method)
-    if req.method == "POST":
-        body =  json.loads(req.body)
-        # TODO validate data
-        grocery_list = GroceryList(
-            name=body["name"],
-            user=req.user
-        )
-        grocery_list.save()
-        for item_name in body["items"]:
-            item = Item(
-                grocery_list=grocery_list,
-                name=item_name,
-                purchased=False
-            )
-            item.save()
-        return JsonResponse({"success": True})
-    else:
-        lists = GroceryList.objects.filter(user=req.user)
-        lists = [model_to_dict(list) for list in lists]
-        print(lists)
-        return JsonResponse({ "groceryLists": lists })
-
 def create_raffle(req: HttpRequest):
     body = json.loads(req.body)
-    # validate data
+
+    if not body["raffleTitle"] \
+    or not body["raffleDesc"] \
+    or not body["maxTickets"] \
+    or not body["raffleCode"] \
+    or not body["raffleWinDet"]:
+        return JsonResponse({"success": "false", "error": "You must fill out all input fields!"})
+    
+    print(body["raffleEndDate"])
     raffle = Raffle(
         name=body["raffleTitle"],
         description=body["raffleDesc"],
         max_tickets=int(body["maxTickets"]),
         code=body["raffleCode"],
+        finished=False,
+        winner_details=body["raffleWinDet"],
+        winner="",
         user=req.user
     )
     raffle.save()
@@ -84,35 +55,46 @@ def create_raffle(req: HttpRequest):
     return JsonResponse({"success": True})
 
 @login_required
-def get_ownedRaffles(req: HttpRequest):
-    raffles = [model_to_dict(raffle) for raffle in Raffle.objects.filter(user=req.user)]
-    return JsonResponse({"raffles": raffles})
+def get_owned_raffles(req: HttpRequest):
+    raffles = Raffle.objects.filter(user=req.user)
+    return JsonResponse({"raffles": [model_to_dict(raffle) for raffle in raffles]})
 
-def get_joinedRaffles(req: HttpRequest):
+@login_required
+def get_joined_raffles(req: HttpRequest):
     tickets = Ticket.objects.filter(user=req.user)
     raffles = []
     for ticket in tickets:
         raffles.append(ticket.raffle)
-    raffles = [model_to_dict(raffle) for raffle in raffles]
-    print(raffles)
-    return JsonResponse({"joinedRaffles": raffles})
+    return JsonResponse({"joinedRaffles": [model_to_dict(raffle) for raffle in raffles]})
 
 @login_required
 def edit_raffle(req: HttpRequest, id):
     raffle = Raffle.objects.get(pk=id)
     body = json.loads(req.body)
 
-    # Validate data
+    if not body["raffleTitle"] \
+    or not body["raffleDesc"] \
+    or not body["raffleWinDet"]:
+        return JsonResponse({"success": "false", "error": "You must fill out all input fields!"})
+    
     raffle.name = body["raffleTitle"]
     raffle.description = body["raffleDesc"]
+    raffle.winner_details = body["raffleWinDet"]
     raffle.save()
-    return JsonResponse({"success": "true"})
+
+    return JsonResponse({"success": "true", "error": ""})
 
 @login_required
 def get_raffle(req: HttpRequest, id):
-    raffle = model_to_dict(Raffle.objects.get(pk=id))
+    raffle = Raffle.objects.get(pk=id)
+    tickets = Ticket.objects.filter(raffle_id=raffle.id)
+    joined = False
+    for ticket in tickets:
+        if ticket.user == req.user:
+            joined = True
+    is_owner = raffle.user == req.user
 
-    return JsonResponse({"raffle": raffle})
+    return JsonResponse({"raffle": model_to_dict(raffle), "isOwner": is_owner, "joined": joined, "numTickets": len(tickets)})
 
 @login_required
 def find_raffle(req: HttpRequest):
@@ -126,16 +108,47 @@ def find_raffle(req: HttpRequest):
 @login_required
 def join_raffle(req: HttpRequest, id):
     raffle = Raffle.objects.get(pk=id)
+    tickets = Ticket.objects.filter(raffle_id=raffle.id)
 
     if raffle.user == req.user:
         return JsonResponse({"success": "false", "error":"Cannot join! You own this Raffle!"})
     
-    if Ticket.objects.filter(user_id = req.user).exists():
+    if Ticket.objects.filter(user_id=req.user, raffle_id=raffle.id).exists():
         return JsonResponse({"success": "false", "error":"You have already joined this Raffle!"})
+    
+    if len(tickets) >= raffle.max_tickets:
+        return JsonResponse({"success": "false", "error":"There are no more spots left in this raffle!"})
     
     ticket = Ticket(raffle=raffle, user=req.user)
     ticket.save()
     return JsonResponse({"success": "true", "error":""})
 
-# def create_raffle(req: HttpRequest):
-#     return JsonResponse()
+@login_required
+def choose_winner(req: HttpRequest, id):
+    raffle = Raffle.objects.get(pk=id)
+    if req.user != raffle.user:
+        return JsonResponse({"success": "false", "error": "You do not own this raffle!"})
+    if raffle.finished == True:
+        return JsonResponse({"success": "false", "error": "This raffle has already finished!"})
+
+    tickets = Ticket.objects.filter(raffle_id=raffle.id)
+
+    if len(tickets) == 0:
+        return JsonResponse({"success": "false", "error": "There are no tickets in this raffle yet!"})
+
+    winner = choice(tickets).user
+    raffle.winner = winner.email
+    raffle.finished = True
+    raffle.save()
+
+    return JsonResponse({"success": "true", "error": ""})
+
+@login_required
+def get_winner(req: HttpRequest, id):
+    raffle = Raffle.objects.get(pk=id)
+    winner = User.objects.get(email=raffle.winner)
+    if req.user != raffle.user:
+        return JsonResponse({"success": "false", "error": "You do not own this raffle!", "winner": ""})
+    if not raffle.winner:
+        return JsonResponse({"success": "false", "error": "You have not chosen a winner!", "winner": ""})
+    return JsonResponse({"success": "true", "winner": model_to_dict(winner)})
