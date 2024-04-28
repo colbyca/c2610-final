@@ -131,3 +131,11 @@ STATIC_URL = 'static/' if not DEBUG else "__UNUSED__/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "registration/sign_in/"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'rafwiz.noreply@gmail.com'
+EMAIL_HOST_PASSWORD = 'R4FW1zarD!829'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
