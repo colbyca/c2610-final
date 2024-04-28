@@ -35,7 +35,7 @@ function App() {
       <Navigation />
       <div className="home-container">
         <AnimatePresence initial={false}>
-          <Routes location={location} key={location.pathname}>
+          <Routes location={location} key={location.pathname} >
             <Route path="/" element={<JoinRaffle />} />
             <Route path="/raffles" element={<h1>I am on the the list page</h1>} />
             <Route path="/raffle/new" element={<NewRaffle />} />

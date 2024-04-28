@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import 'vite/modulepreload-polyfill'
-import { createHashRouter, RouterProvider, BrowserRouter as Router} from "react-router-dom";
+import { createHashRouter, RouterProvider, HashRouter as Router} from "react-router-dom";
 import { JoinRaffle } from './pages/_JoinRaffle.jsx'
 import { NewList } from './pages/_NewList.jsx'
 import { NewRaffle } from './pages/_NewRaffle.jsx'
@@ -38,7 +38,7 @@ import { EditRaffle } from './pages/_EditRaffle.jsx'
 function Main(){
   return(
     <div>
-      <Router>
+      <Router >
         <App/>
       </Router>
     </div>
