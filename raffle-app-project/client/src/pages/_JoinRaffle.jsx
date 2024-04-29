@@ -49,6 +49,7 @@ export const JoinRaffle = () => {
     exit={{y:"-50%", opacity:0}}
     >
       <div className="join">
+        <h2>Join Raffle</h2>
         <input value={raffleCode} required placeholder="Join Code" onChange={e => setCode(e.target.value)} />  
         <Link to="/" className="button" onClick={joinRaffle}>Search Raffle</Link>
       </div>

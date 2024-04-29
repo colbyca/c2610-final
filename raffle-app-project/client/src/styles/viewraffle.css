@@ -63,3 +63,13 @@ form {
 .winner{
     width: 300px;
 }
+
+.winnerdeets{
+    display:flex;
+    justify-content:flex-start;
+    gap:30px;
+}
+
+h4{
+    margin:0px;
+}
