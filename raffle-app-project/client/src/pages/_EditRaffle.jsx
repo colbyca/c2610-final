@@ -82,7 +82,7 @@ export const EditRaffle = () => {
 
         <label htmlFor="winner details">
           Winner Details
-          <textarea rows="5" required maxLength="300" value={raffleWinDet} onChange={e => setRaffleWinDet(e.target.value)} />
+          <textarea rows="3" required maxLength="300" value={raffleWinDet} onChange={e => setRaffleWinDet(e.target.value)} />
         </label>
 
         <button className="button submit">Save Changes</button>

@@ -76,7 +76,7 @@ export const ViewRaffle = () => {
                   <div>Join Code: </div><div>{raffle.code}</div>
                 </label>
                 <button className="button" onClick={(e) => { e.preventDefault(); navigate(`/raffle/${raffle.id}/edit/`) }}>Edit Raffle</button>
-                <button className="button" onClick={chooseWinner}>Choose the winner!</button>
+                <button className="button winner" onClick={chooseWinner}>Choose the winner!</button>
               </>
             ) :
             (<></>)
