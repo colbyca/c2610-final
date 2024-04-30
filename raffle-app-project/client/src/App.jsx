@@ -3,7 +3,6 @@ import { Navigation } from "./pages/_Navigation"
 import { AnimatePresence } from "framer-motion";
 import { useLocation, Routes, Route } from "react-router-dom";
 import './index.css'
-
 import { JoinRaffle } from './pages/_JoinRaffle.jsx'
 import { NewRaffle } from './pages/_NewRaffle.jsx'
 import { UserInfo } from './pages/_UserInfo.jsx'

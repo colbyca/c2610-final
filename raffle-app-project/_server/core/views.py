@@ -7,8 +7,6 @@ from django.http import JsonResponse
 from .models import Raffle, Ticket, User
 from django.http import HttpRequest
 from django.forms.models import model_to_dict
-from datetime import datetime
-from django.core.mail import send_mail
 from random import choice
 # Load manifest when server launches
 MANIFEST = {}

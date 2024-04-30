@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import { Navigation } from "./_Navigation"
 import { motion as m } from "framer-motion";
 import { useRaffles } from "../../utils/use_raffles"
 import "../styles/userinfo.css"
