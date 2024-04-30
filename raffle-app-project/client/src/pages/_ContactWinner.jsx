@@ -56,16 +56,16 @@ export const ContactWinner = () => {
                   ) :
                   (
                     <form>
-                      <h3>The winner of your raffle is {winner.first_name} {raffle.last_name}</h3>
+                      <h3>The winner of your raffle is {winner.first_name} {winner.last_name}!</h3>
                       <div>Send them an email with your instructions to claim their prize:</div>
                       <div className="winnerdeets">
                         <h4>
-                          Email: 
+                          Email:
                         </h4>
                         <a href={`mailto:${winner.email}`}>{winner.email}</a>
                       </div>
                       <div className="winnerdeets">
-                        <h4>Raffle Winner Details: </h4>
+                        <h4>Instructions: </h4>
                         <div>{raffle.winner_details}</div>
                       </div>
                     </form>

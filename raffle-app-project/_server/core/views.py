@@ -28,7 +28,7 @@ def index(req):
     }
     return render(req, "core/index.html", context)
 
-
+@login_required
 def create_raffle(req: HttpRequest):
     body = json.loads(req.body)
 
@@ -71,6 +71,9 @@ def get_joined_raffles(req: HttpRequest):
 def edit_raffle(req: HttpRequest, id):
     raffle = Raffle.objects.get(pk=id)
     body = json.loads(req.body)
+
+    if req.user != raffle.user:
+        return JsonResponse({"success": "false", "error": "You do not own this raffle!"})
 
     if not body["raffleTitle"] \
     or not body["raffleDesc"] \

@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const EditRaffle = () => {
   const { id } = useParams();
-  const [raffle, loading] = useRaffle(id);
+  const [raffle, loading, isOwner] = useRaffle(id);
   const [raffleTitle, setRaffleTitle] = useState("");
   const [raffleDesc, setRaffleDesc] = useState("");
   const [raffleWinDet, setRaffleWinDet] = useState("");
@@ -61,32 +61,42 @@ export const EditRaffle = () => {
       transition={{ duration: 0.75, ease: "easeInOut" }}
       exit={{ y: "-50%", opacity: 0 }}
     >
-      <form onSubmit={editRaffle}>
-        <label htmlFor="raffle-title">
-          Raffle Title
-          <input value={raffleTitle} required onChange={e => setRaffleTitle(e.target.value)} />
-        </label>
+      {
+        isOwner ?
+          (
+            <form onSubmit={editRaffle}>
+              <label htmlFor="raffle-title">
+                Raffle Title
+                <input value={raffleTitle} required onChange={e => setRaffleTitle(e.target.value)} />
+              </label>
 
-        <label htmlFor="raffle-code">
-          <div>Join Code: </div><div>{raffle.code}</div>
-        </label>
+              <label htmlFor="raffle-code">
+                <div>Join Code: </div><div>{raffle.code}</div>
+              </label>
 
-        <label htmlFor="max-tickets">
-          <div>Max # of Entries: </div><div>{raffle.max_tickets}</div>
-        </label>
+              <label htmlFor="max-tickets">
+                <div>Max # of Entries: </div><div>{raffle.max_tickets}</div>
+              </label>
 
-        <label htmlFor="raffle-description">
-          Description
-          <textarea rows="5" required maxlength="300" value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
-        </label>
+              <label htmlFor="raffle-description">
+                Description
+                <textarea rows="5" required maxlength="300" value={raffleDesc} onChange={e => setRaffleDesc(e.target.value)} />
+              </label>
 
-        <label htmlFor="winner details">
-          Winner Details
-          <textarea rows="3" required maxLength="300" value={raffleWinDet} onChange={e => setRaffleWinDet(e.target.value)} />
-        </label>
+              <label htmlFor="winner details">
+                Winner Details
+                <textarea rows="3" required maxLength="300" value={raffleWinDet} onChange={e => setRaffleWinDet(e.target.value)} />
+              </label>
 
-        <button className="button submit">Save Changes</button>
-      </form>
+              <button className="button submit">Save Changes</button>
+            </form>
+          ) :
+          (
+            <form>
+              You don't own this raffle!
+            </form>
+          )
+      }
     </m.div>
   )
 }

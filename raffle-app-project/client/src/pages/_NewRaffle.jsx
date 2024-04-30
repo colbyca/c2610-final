@@ -35,7 +35,7 @@ export const NewRaffle = () => {
       raffleEndDate
     });
 
-    navigate(-1);
+    navigate(`/userinfo/`);
   }
   console.log(raffleEndDate)
 
